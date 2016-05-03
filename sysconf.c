@@ -94,7 +94,7 @@ PHP_RINIT_FUNCTION(sysconf)
 {
 #if defined(COMPILE_DL_SYSCONF) && defined(ZTS)
 #	if PHP_VERSION_ID >= 70000
-	ZEND_TSRMLS_CACHE_UPDATE();
+		ZEND_TSRMLS_CACHE_UPDATE();
 #	endif
 #endif
 
@@ -134,7 +134,7 @@ PHP_FUNCTION(sysconf)
 	zend_long result = 0;
 	int _errno = errno;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l", &name) != SUCCESS) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &name) != SUCCESS) {
 		return;
 	}
 
@@ -175,11 +175,11 @@ zend_module_entry sysconf_module_entry = {
 /* }}} */
 
 #ifdef COMPILE_DL_SYSCONF
-#ifdef ZTS
-#if PHP_VERSION_ID >= 70000
-	ZEND_TSRMLS_CACHE_DEFINE()
-#endif
-#endif
+#	ifdef ZTS
+#		if PHP_VERSION_ID >= 70000
+			ZEND_TSRMLS_CACHE_DEFINE()
+#		endif
+#	endif
 ZEND_GET_MODULE(sysconf)
 #endif
 

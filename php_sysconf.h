@@ -40,7 +40,9 @@ extern zend_module_entry sysconf_module_entry;
 #endif
 
 #if defined(ZTS) && defined(COMPILE_DL_SYSCONF)
-ZEND_TSRMLS_CACHE_EXTERN()
+#	if PHP_VERSION_ID >= 70000
+		ZEND_TSRMLS_CACHE_EXTERN()
+#	endif
 #endif
 
 #endif	/* PHP_SYSCONF_H */
