@@ -141,7 +141,7 @@ PHP_FUNCTION(sysconf)
 	result = sysconf(name);
 
 	if (errno != _errno && errno == EINVAL) {
-		zend_throw_exception_ex(spl_ce_RuntimeException, name,
+		zend_throw_exception_ex(spl_ce_RuntimeException, name TSRMLS_CC,
 			"the name provided("ZEND_LONG_FMT") is not valid", name);
 		return;
 	}
