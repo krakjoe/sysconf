@@ -93,7 +93,9 @@ PHP_MINIT_FUNCTION(sysconf)
 PHP_RINIT_FUNCTION(sysconf)
 {
 #if defined(COMPILE_DL_SYSCONF) && defined(ZTS)
+#	if PHP_VERSION_ID >= 70000
 	ZEND_TSRMLS_CACHE_UPDATE();
+#	endif
 #endif
 
 #ifndef HAVE_SPL
@@ -174,7 +176,9 @@ zend_module_entry sysconf_module_entry = {
 
 #ifdef COMPILE_DL_SYSCONF
 #ifdef ZTS
+#if PHP_VERSION_ID >= 70000
 	ZEND_TSRMLS_CACHE_DEFINE()
+#endif
 #endif
 ZEND_GET_MODULE(sysconf)
 #endif
